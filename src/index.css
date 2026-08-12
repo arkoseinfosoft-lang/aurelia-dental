@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Anchor targets sit clear of the fixed navbar */
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+::selection {
+  background: #b08d57;
+  color: #ffffff;
+}
+
+/* Slim, elegant scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #faf8f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #d9c9a8;
+  border-radius: 999px;
+  border: 2px solid #faf8f4;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b08d57;
+}
+
+/* Visible keyboard focus everywhere, without adding an outline to mouse clicks */
+:focus-visible {
+  outline: 2px solid #b08d57;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-[11px] tracking-widest2 uppercase text-gold-dark;
+  }
+
+  .section-heading {
+    @apply font-display text-4xl md:text-5xl leading-[1.08] text-ink;
+  }
+
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-ink px-7 py-3.5
+      text-sm font-semibold tracking-wide text-white transition-all duration-300
+      hover:bg-gold-dark hover:shadow-lift active:scale-[0.97] focus-visible:outline-gold;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-transparent
+      px-7 py-3.5 text-sm font-semibold tracking-wide text-ink transition-all duration-300
+      hover:border-ink hover:bg-ink hover:text-white active:scale-[0.97];
+  }
+
+  .btn-gold {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5
+      text-sm font-semibold tracking-wide text-white shadow-soft transition-all duration-300
+      hover:bg-gold-dark hover:shadow-lift active:scale-[0.97] disabled:opacity-60 disabled:pointer-events-none;
+  }
+
+  .chip {
+    @apply font-mono text-[10.5px] tracking-widest2 uppercase text-graphite;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-ink/[0.06] bg-white shadow-card;
+  }
+}
+
+@layer utilities {
+  .mask-fade-r {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
