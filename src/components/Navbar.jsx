@@ -18,9 +18,12 @@ export default function Navbar() {
   }, []);
 
   const handleNavClick = (e, href) => {
-    if (e) e.preventDefault();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setMenuOpen(false);
-    scrollToSection(href, 80);
+    scrollToSection(href, 76);
   };
 
   return (
@@ -32,7 +35,7 @@ export default function Navbar() {
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           scrolled || menuOpen
             ? "bg-ivory/95 backdrop-blur-md shadow-card py-3 border-b border-ink/5"
-            : "bg-transparent py-5 md:py-6"
+            : "bg-transparent py-4 md:py-6"
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10">
@@ -82,6 +85,7 @@ export default function Navbar() {
           </div>
 
           <button
+            type="button"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
@@ -98,7 +102,7 @@ export default function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: "easeInOut" }}
+              transition={{ duration: 0.22, ease: "easeInOut" }}
               className="overflow-hidden border-t border-ink/5 bg-ivory md:hidden shadow-card max-h-[calc(100vh-64px)] overflow-y-auto"
             >
               <ul className="flex flex-col gap-1 px-5 pt-3 pb-6">
@@ -109,7 +113,7 @@ export default function Navbar() {
                       <a
                         href={link.href}
                         onClick={(e) => handleNavClick(e, link.href)}
-                        className={`flex items-center justify-between py-3.5 px-2 text-base font-display rounded-lg transition-colors ${
+                        className={`flex items-center justify-between py-3.5 px-3 text-base font-display rounded-lg transition-colors active:bg-ink/10 ${
                           isActive ? "text-ink font-semibold bg-ink/5" : "text-ink/80 hover:text-ink"
                         }`}
                       >
@@ -125,7 +129,7 @@ export default function Navbar() {
                   <a
                     href="#reserve"
                     onClick={(e) => handleNavClick(e, "#reserve")}
-                    className="btn-primary w-full text-sm py-3.5 shadow-card"
+                    className="btn-primary w-full text-sm py-3.5 shadow-card justify-center"
                   >
                     Reserve a Visit
                   </a>
@@ -145,7 +149,7 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 top-[64px] bg-ink/40 backdrop-blur-sm md:hidden z-40"
+            className="fixed inset-0 top-[60px] bg-ink/40 backdrop-blur-sm md:hidden z-40"
           />
         )}
       </AnimatePresence>
