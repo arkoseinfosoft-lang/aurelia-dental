@@ -101,8 +101,7 @@ export default function Booking() {
       }
     }
 
-    // Demo mode: no gateway key configured, or the script failed to load.
-    // Simulates a real checkout so the flow is fully demonstrable pre-launch.
+    // Demo mode: simulate checkout
     window.setTimeout(() => {
       setReceipt({ id: `DEMO-${Date.now().toString().slice(-8)}`, demo: true });
       setStatus("success");
@@ -117,23 +116,23 @@ export default function Booking() {
   }
 
   return (
-    <section id="reserve" className="bg-ink py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <section id="reserve" className="bg-ink py-16 sm:py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <Reveal className="mx-auto max-w-xl text-center">
           <p className="eyebrow justify-center !text-gold-light">
             Reserve Your Visit
           </p>
-          <h2 className="section-heading text-balance mt-4 text-white">
+          <h2 className="section-heading text-balance mt-3 sm:mt-4 text-white text-3xl sm:text-4xl md:text-5xl">
             Begin with a considered first visit.
           </h2>
-          <p className="mt-5 text-[15px] leading-relaxed text-white/60">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-[15px] leading-relaxed text-white/60">
             Choose a starting point below — every fee is fully credited
             toward your treatment plan.
           </p>
         </Reveal>
 
         {/* Package selector */}
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-10 sm:mt-16 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
           {packages.map((pkg, i) => {
             const isSelected = selected === pkg.id;
             return (
@@ -141,19 +140,19 @@ export default function Booking() {
                 <button
                   type="button"
                   onClick={() => setSelected(pkg.id)}
-                  className={`relative flex h-full w-full flex-col rounded-2xl border p-6 text-left transition-all duration-300 ${
+                  className={`relative flex h-full w-full flex-col rounded-2xl border p-5 sm:p-6 text-left transition-all duration-300 ${
                     isSelected
                       ? "border-gold bg-white shadow-lift"
                       : "border-white/10 bg-white/[0.03] hover:border-white/25"
                   }`}
                 >
                   {pkg.featured && (
-                    <span className="absolute -top-3 left-6 rounded-full bg-gold px-3 py-1 font-mono text-[10px] tracking-widest2 uppercase text-white">
+                    <span className="absolute -top-3 left-5 sm:left-6 rounded-full bg-gold px-3 py-0.5 sm:py-1 font-mono text-[10px] tracking-widest2 uppercase text-white shadow-sm">
                       Most Reserved
                     </span>
                   )}
                   <p
-                    className={`font-display text-xl ${
+                    className={`font-display text-lg sm:text-xl ${
                       isSelected ? "text-ink" : "text-white"
                     }`}
                   >
@@ -167,18 +166,18 @@ export default function Booking() {
                     {pkg.note}
                   </p>
                   <p
-                    className={`mt-5 font-display text-3xl ${
+                    className={`mt-4 sm:mt-5 font-display text-2xl sm:text-3xl ${
                       isSelected ? "text-ink" : "text-white"
                     }`}
                   >
                     ₹{pkg.price.toLocaleString("en-IN")}
                   </p>
 
-                  <ul className="mt-5 space-y-2.5">
+                  <ul className="mt-4 sm:mt-5 space-y-2 sm:space-y-2.5">
                     {pkg.features.map((f) => (
                       <li
                         key={f}
-                        className={`flex items-start gap-2 text-[13px] leading-snug ${
+                        className={`flex items-start gap-2 text-xs sm:text-[13px] leading-snug ${
                           isSelected ? "text-graphite" : "text-white/60"
                         }`}
                       >
@@ -216,8 +215,8 @@ export default function Booking() {
         </div>
 
         {/* Booking form / payment */}
-        <Reveal delay={0.15} className="mt-14">
-          <div className="mx-auto max-w-2xl rounded-[1.75rem] bg-white p-7 shadow-lift sm:p-10">
+        <Reveal delay={0.15} className="mt-10 sm:mt-14">
+          <div className="mx-auto max-w-2xl rounded-[1.75rem] bg-white p-5 sm:p-8 md:p-10 shadow-lift">
             <AnimatePresence mode="wait">
               {status === "success" ? (
                 <motion.div
@@ -230,10 +229,10 @@ export default function Booking() {
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-light text-teal-dark">
                     <PartyPopper size={26} />
                   </div>
-                  <h3 className="mt-5 font-display text-2xl text-ink">
+                  <h3 className="mt-5 font-display text-xl sm:text-2xl text-ink">
                     You're reserved, {form.name.split(" ")[0]}.
                   </h3>
-                  <p className="mt-2 max-w-sm text-sm leading-relaxed text-graphite">
+                  <p className="mt-2 max-w-sm text-xs sm:text-sm leading-relaxed text-graphite">
                     Your {activePackage.name.toLowerCase()} is booked for{" "}
                     {new Date(form.date).toLocaleDateString("en-IN", {
                       day: "numeric",
@@ -277,7 +276,7 @@ export default function Booking() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onSubmit={handleSubmit}
-                  className="grid grid-cols-1 gap-5 sm:grid-cols-2"
+                  className="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-2"
                   noValidate
                 >
                   <div className="sm:col-span-2">
@@ -329,7 +328,7 @@ export default function Booking() {
                         setForm({ ...form, notes: e.target.value })
                       }
                       placeholder="Anything you'd like the team to know before your visit"
-                      className="w-full resize-none rounded-xl border border-ink/10 bg-ivory/60 px-4 py-3 text-sm text-ink placeholder:text-graphite/60 focus-visible:outline-gold"
+                      className="w-full resize-none rounded-xl border border-ink/10 bg-ivory/60 px-4 py-3 text-base sm:text-sm text-ink placeholder:text-graphite/60 focus-visible:outline-gold"
                     />
                   </div>
 
@@ -337,7 +336,7 @@ export default function Booking() {
                     <button
                       type="submit"
                       disabled={status === "processing"}
-                      className="btn-gold w-full"
+                      className="btn-gold w-full py-3.5"
                     >
                       {status === "processing" ? (
                         <>
@@ -353,7 +352,7 @@ export default function Booking() {
                       )}
                     </button>
 
-                    <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-graphite">
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-graphite text-center">
                       <span className="flex items-center gap-1.5">
                         <ShieldCheck size={13} className="text-teal" />
                         256-bit encrypted checkout
@@ -389,7 +388,7 @@ function Field({ label, error, value, onChange, type = "text", ...rest }) {
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full rounded-xl border bg-ivory/60 px-4 py-3 text-sm text-ink placeholder:text-graphite/60 focus-visible:outline-gold ${
+        className={`w-full rounded-xl border bg-ivory/60 px-4 py-3 text-base sm:text-sm text-ink placeholder:text-graphite/60 focus-visible:outline-gold ${
           error ? "border-red-300" : "border-ink/10"
         }`}
         {...rest}

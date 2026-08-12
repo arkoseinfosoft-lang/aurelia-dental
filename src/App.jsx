@@ -23,7 +23,7 @@ export default function App() {
   }, [loading]);
 
   return (
-    <>
+    <div className="min-h-screen bg-ivory text-ink antialiased overflow-x-hidden w-full relative">
       <Preloader show={loading} />
       <Navbar />
       <main>
@@ -36,6 +36,6 @@ export default function App() {
       </main>
       <Footer />
       <FloatingActions />
-    </>
+    </div>
   );
 }

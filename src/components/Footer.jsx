@@ -1,24 +1,25 @@
 import { Instagram, Facebook, Mail, Phone, MapPin, Clock } from "lucide-react";
 import { navLinks, studio } from "../data/content";
+import { scrollToSection } from "../utils/scroll";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   const scrollTo = (e, href) => {
     e.preventDefault();
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    scrollToSection(href, 80);
   };
 
   return (
-    <footer className="bg-ink pt-20 text-white/70">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-14 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+    <footer className="bg-ink pt-16 sm:pt-20 text-white/70">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 gap-10 sm:gap-12 border-b border-white/10 pb-12 sm:pb-14 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
           <div>
             <a href="#home" onClick={(e) => scrollTo(e, "#home")} className="font-display text-2xl text-white">
               {studio.shortName}
               <span className="text-gold">.</span>
             </a>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
               {studio.tagline} A private cosmetic and restorative dentistry
               studio built around a chart-first, unhurried approach to care.
             </p>
@@ -62,7 +63,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-3.5 text-sm">
               <li className="flex items-start gap-2.5">
                 <MapPin size={15} className="mt-0.5 shrink-0 text-gold-light" />
-                {studio.address}
+                <span>{studio.address}</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone size={15} className="shrink-0 text-gold-light" />
@@ -78,7 +79,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Clock size={15} className="shrink-0 text-gold-light" />
-                {studio.hours}
+                <span>{studio.hours}</span>
               </li>
             </ul>
           </div>
@@ -93,7 +94,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 py-7 text-xs text-white/40 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-3 py-6 sm:py-7 text-xs text-white/40 sm:flex-row text-center sm:text-left">
           <p>© {year} {studio.name}. All rights reserved.</p>
           <p>Crafted with care for every smile that walks in.</p>
         </div>

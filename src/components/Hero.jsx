@@ -3,6 +3,7 @@ import { ArrowRight, PlayCircle } from "lucide-react";
 import { heroImage, heroStats, studio } from "../data/content";
 import Media from "./Media";
 import useCountUp from "../hooks/useCountUp";
+import { scrollToSection } from "../utils/scroll";
 
 function Stat({ stat, index }) {
   const [ref, value] = useCountUp(stat.value, {
@@ -16,16 +17,16 @@ function Stat({ stat, index }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.1 + index * 0.12, duration: 0.6 }}
-      className="border-l border-ink/10 pl-4"
+      className="border-l border-ink/10 pl-3 sm:pl-4"
     >
-      <div className="font-display text-2xl text-ink md:text-3xl">
+      <div className="font-display text-xl sm:text-2xl md:text-3xl text-ink">
         {value.toLocaleString(undefined, {
           minimumFractionDigits: stat.decimals || 0,
           maximumFractionDigits: stat.decimals || 0,
         })}
         <span className="text-gold">{stat.suffix}</span>
       </div>
-      <div className="mt-1 text-xs text-graphite">{stat.label}</div>
+      <div className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs text-graphite leading-tight">{stat.label}</div>
     </motion.div>
   );
 }
@@ -33,13 +34,13 @@ function Stat({ stat, index }) {
 export default function Hero() {
   const scrollTo = (e, href) => {
     e.preventDefault();
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    scrollToSection(href, 80);
   };
 
   return (
     <section
       id="home"
-      className="relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-44"
+      className="relative overflow-hidden pb-16 sm:pb-20 pt-28 sm:pt-36 md:pb-28 md:pt-44"
     >
       {/* Ambient background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -47,7 +48,7 @@ export default function Hero() {
         <div className="absolute bottom-[-15%] left-[-10%] h-[420px] w-[420px] rounded-full bg-teal-light/60 blur-3xl" />
       </div>
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2 lg:gap-12 lg:px-10">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 sm:gap-16 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:px-10">
         {/* Copy column */}
         <div>
           <motion.p
@@ -63,7 +64,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.15 }}
-            className="text-balance mt-5 font-display text-[2.6rem] leading-[1.06] text-ink sm:text-6xl lg:text-[3.6rem]"
+            className="text-balance mt-4 sm:mt-5 font-display text-3xl sm:text-5xl lg:text-[3.6rem] leading-[1.08] text-ink"
           >
             Dentistry, composed{" "}
             <span className="italic text-gold-dark">like art.</span>
@@ -73,7 +74,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-6 max-w-md text-[15px] leading-relaxed text-graphite"
+            className="mt-5 sm:mt-6 max-w-md text-sm sm:text-[15px] leading-relaxed text-graphite"
           >
             A private studio for porcelain veneers, invisible orthodontics
             and restorative artistry — where every smile is charted,
@@ -84,12 +85,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
-            className="mt-9 flex flex-wrap items-center gap-4"
+            className="mt-7 sm:mt-9 flex flex-col sm:flex-row sm:items-center gap-3.5 sm:gap-4"
           >
             <a
               href="#reserve"
               onClick={(e) => scrollTo(e, "#reserve")}
-              className="btn-primary"
+              className="btn-primary w-full sm:w-auto"
             >
               Reserve a Consultation
               <ArrowRight size={16} />
@@ -97,21 +98,21 @@ export default function Hero() {
             <a
               href="#transformations"
               onClick={(e) => scrollTo(e, "#transformations")}
-              className="btn-secondary"
+              className="btn-secondary w-full sm:w-auto text-center justify-center"
             >
               <PlayCircle size={16} />
               View Transformations
             </a>
           </motion.div>
 
-          <div className="mt-14 grid max-w-md grid-cols-3 gap-6">
+          <div className="mt-10 sm:mt-14 grid max-w-md grid-cols-3 gap-3 sm:gap-6">
             {heroStats.map((stat, i) => (
               <Stat stat={stat} index={i} key={stat.label} />
             ))}
           </div>
         </div>
 
-        {/* Image column with signature "smile chart" annotation motif */}
+        {/* Image column */}
         <div className="relative mx-auto w-full max-w-md lg:max-w-none">
           <motion.div
             initial={{ opacity: 0, scale: 0.94 }}
@@ -132,7 +133,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 20, y: -10 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.7, delay: 1 }}
-            className="animate-float absolute -right-4 top-8 hidden w-48 rounded-xl border border-ink/[0.06] bg-white/95 p-3.5 shadow-soft backdrop-blur sm:block"
+            className="animate-float absolute -right-2 sm:-right-4 top-6 sm:top-8 hidden w-44 sm:w-48 rounded-xl border border-ink/[0.06] bg-white/95 p-3 sm:p-3.5 shadow-soft backdrop-blur sm:block"
           >
             <p className="chip">Upper Arch</p>
             <p className="mt-1 font-display text-sm text-ink">
@@ -143,12 +144,12 @@ export default function Hero() {
             </p>
           </motion.div>
 
-          {/* Floating chart annotation — bottom, ties to booking */}
+          {/* Floating chart annotation — bottom */}
           <motion.div
             initial={{ opacity: 0, x: -20, y: 10 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.7, delay: 1.2 }}
-            className="animate-floatSlow absolute -left-6 bottom-10 w-52 rounded-xl border border-ink/[0.06] bg-white/95 p-4 shadow-soft backdrop-blur"
+            className="animate-floatSlow absolute left-2 sm:-left-6 bottom-4 sm:bottom-10 w-48 sm:w-52 rounded-xl border border-ink/[0.06] bg-white/95 p-3.5 sm:p-4 shadow-soft backdrop-blur"
           >
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
@@ -157,10 +158,10 @@ export default function Hero() {
               </span>
               <p className="chip !text-teal-dark">Bookings Open</p>
             </div>
-            <p className="mt-2 font-display text-sm text-ink">
+            <p className="mt-1.5 sm:mt-2 font-display text-xs sm:text-sm text-ink">
               Consultation · ₹999
             </p>
-            <p className="mt-0.5 text-[11px] text-graphite">
+            <p className="mt-0.5 text-[10px] sm:text-[11px] text-graphite">
               Fully refundable against treatment
             </p>
           </motion.div>
