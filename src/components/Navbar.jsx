@@ -99,7 +99,7 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: "easeInOut" }}
-              className="overflow-hidden border-t border-ink/5 bg-ivory md:hidden shadow-card"
+              className="overflow-hidden border-t border-ink/5 bg-ivory md:hidden shadow-card max-h-[calc(100vh-64px)] overflow-y-auto"
             >
               <ul className="flex flex-col gap-1 px-5 pt-3 pb-6">
                 {navLinks.map((link) => {

@@ -8,11 +8,13 @@ export function scrollToSection(href, offset = 80) {
   const el = document.getElementById(targetId);
   if (!el) return;
 
-  const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+  const elementPosition = el.getBoundingClientRect().top + (window.pageYOffset || window.scrollY);
   const offsetPosition = Math.max(0, elementPosition - offset);
 
-  window.scrollTo({
-    top: offsetPosition,
-    behavior: "smooth",
+  requestAnimationFrame(() => {
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
   });
 }
